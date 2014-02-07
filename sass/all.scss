@@ -25,6 +25,10 @@ $page-container: ".page";
 
 $off-canvas-menu-width: 260px;
 
+html, body {
+  height: 100%;
+}
+
 .open-menu-btn {
   position: fixed;
 }
@@ -34,7 +38,7 @@ $off-canvas-menu-width: 260px;
   .wrapper {
     width: 100%;
     min-height: 100%;
-    overflow: hidden;
+    // overflow: hidden;
   }
 
   .outside {
@@ -80,23 +84,16 @@ $off-canvas-menu-width: 260px;
     .page {
       @include translateX( $off-canvas-menu-width );
     }
+
     .off-canvas-mask {
       height: 100%;
     }
   }
 
   &.scroll-control {
-    overflow: hidden;
     .wrapper {
       height: 100%;
-    }
-    .outside-inner {
-      height: 100%;
-      overflow: auto;
-    }
-    .page {
-      height: 100%;
-      overflow: auto; //目前無 javascript 控制，暫時取消滾動。
+      overflow: hidden;
     }
   }
 
