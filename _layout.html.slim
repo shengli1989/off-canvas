@@ -3,7 +3,22 @@ html lang="zh-TW"
   head
     = render "/layout_head"
     = render "/layout_og"
-  body
-    = yield
+  body.off-canvas
+    .wrapper
+      .outside
+        .outside-inner
+          h2 Outside
+          - 3.times do
+            p= lorem_paragraphs(2)
+      .page
+        .header
+          h1 Off Canvas
+          button.open-menu-btn menu
+        .content
+          h2 Page Content
+          - 6.times do
+            p= lorem_paragraphs(2)
+        .off-canvas-mask
+
     = render "/layout_foot"
     = render "/layout_livereload"
