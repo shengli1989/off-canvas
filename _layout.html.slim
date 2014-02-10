@@ -6,13 +6,14 @@ html lang="zh-TW"
   body.off-canvas
     .wrapper
       .outside
-        h2 Outside
-        - 3.times do
-          p= lorem_paragraphs(2)
+        .outside-inner
+          h2 Outside
+          - 5.times do
+            p= lorem_paragraphs(2)
       .page
         .page-inner
           .header
-            h1 Off Canvas
+            h1.logo Off Canvas
             button.open-menu-btn menu
           .content
             h2 Page Content

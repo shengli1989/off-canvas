@@ -29,22 +29,30 @@ html, body {
   height: 100%;
 }
 
+.header {
+  @include pie-clearfix;
+  @include trailer(1);
+}
+.logo {
+  float: left;
+}
 .open-menu-btn {
-  position: fixed;
+  @include leader(.5);
+  float: right;
+
 }
 
 .off-canvas {
 
   .wrapper {
     width: 100%;
-    min-height: 100%;
-    // overflow: hidden;
+    height: 100%;
   }
 
   .outside {
     position: fixed;
     top: 0px;
-    left: 0;
+    right: 0;
     z-index: 10;
     width: $off-canvas-menu-width;
     height: 100%;
@@ -64,8 +72,11 @@ html, body {
     top: 0;
     left: 0;
     background-color: white;
-    @include transition(transform .5s ease-out, left .3s ease-out);
+    @include transition(transform .5s ease-out);
     @include backface-visibility(hidden); // 解決 translate 在最後結束時會閃爍的 bug
+  }
+  .page-inner {
+    position: relative;
   }
 
   .off-canvas-mask {
@@ -82,9 +93,8 @@ html, body {
   // 打開外側選單時的狀態
   &.open-menu {
     .page {
-      @include translateX( $off-canvas-menu-width );
+      @include translateX( -$off-canvas-menu-width );
     }
-
     .off-canvas-mask {
       height: 100%;
     }
@@ -92,6 +102,13 @@ html, body {
 
   &.scroll-control {
     .wrapper {
+      position: fixed;
+    }
+    .outside-inner {
+      overflow: auto;
+      height: 100%;
+    }
+    .page {
       height: 100%;
       overflow: hidden;
     }

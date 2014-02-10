@@ -1,19 +1,22 @@
 var off_canvas = function (){
 
-  var body_scroll_top;
+  var body_scroll_top = 0;
+  var outside_inner_scroll_top = 0;
 
   // 展開 menu
   $(".open-menu-btn").on("click", function(event){
-    // 記憶滾動數值
 
+
+    // 記憶滾動數值
     body_scroll_top = $('body').scrollTop(); // body
 
-    $("body").addClass("open-menu");
-    // 繼承滾動數值
-    $('.page').on('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', function(){
-      $('body').addClass('scroll-control');
-      $('.page').css('top', body_scroll_top * -1 +'px');
-    });
+    $('.page-inner').css('top', body_scroll_top * -1 +'px');
+    $('body').addClass('scroll-control');
+    $('.outside-inner').css('top', 0).scrollTop(outside_inner_scroll_top);
+
+    // 延遲開啟 menu
+    setTimeout( function() { $("body").addClass("open-menu"); }, 25 );
+
 
   });
 
@@ -21,13 +24,18 @@ var off_canvas = function (){
   // 關閉 menu
   $(".off-canvas-mask").on("click", function(){
 
-    // 記憶滾動數值
+    outside_inner_scroll_top = $('.outside-inner').scrollTop();
+    // 移除 off-canvas 開啟效果 (延遲時間與動畫一致)
     $("body").removeClass("open-menu");
-    // 繼承滾動值
-    $('.page').on('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', function(){
+
+
+    // 延遲還原 body scrollbar
+    setTimeout( function() {
+      $('.page-inner').css('top', 0);
+      $('.outside-inner').css('top', outside_inner_scroll_top * -1 +'px');
       $("body").removeClass("scroll-control").scrollTop(body_scroll_top);
-      $('.page').css('top', 0);
-    });
+    }, 500 );
+
 
   });
 
